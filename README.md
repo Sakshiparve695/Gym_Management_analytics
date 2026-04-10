@@ -1,116 +1,102 @@
-# 🚀 Gym Management System (Backend + ETL + ML)
+# 🏋️ AI-Driven Gym Analytics & Churn Prediction Platform
 
-A backend-driven Gym Management System built using FastAPI and MySQL that supports member management, attendance tracking, analytics, and churn prediction using machine learning and ETL pipelines.
+## 🚀 Overview
 
----
+A backend-driven analytics platform built using **FastAPI** that manages gym operations, processes attendance data, and predicts customer churn using machine learning.
 
-## 📌 Overview
-
-This project simulates a real-world backend system. It handles operational data such as members and attendance, and transforms it into an analytics layer using an ETL pipeline. It also includes a machine learning model to predict churn risk based on user activity.
+The system also provides **data visualization insights** and is fully **containerized using Docker** for consistent deployment.
 
 ---
 
-## ⚙️ Features
+## ✨ Key Features
 
-- Member Management (Add, Update, Delete, View)
-- Attendance Tracking System
-- Top Active Members using Heap (Priority Queue)
-- Churn Prediction using Machine Learning
-- ETL Pipeline for analytics processing
-- Analytics API to fetch processed data
+* 🔧 RESTful API development using FastAPI
+* 🗄️ MySQL database integration for structured data management
+* 📊 Data processing and analytics using Pandas
+* 🤖 Churn prediction using Scikit-learn (Logistic Regression)
+* 📈 Visualization endpoint for attendance insights
+* 📦 Docker-based containerization for portability and scalability
+* ⚡ Efficient query handling and real-time data processing
 
 ---
 
-## 🧠 Architecture
+## 📊 API Endpoints
 
-Client / Swagger UI  
-        ↓  
-FastAPI Backend  
-        ↓  
-MySQL Database (Operational Data)  
-        ↓  
-ETL Pipeline (Python Script)  
-        ↓  
-Analytics Table (member_analytics)  
+| Endpoint                    | Description                               |
+| --------------------------- | ----------------------------------------- |
+| `/members`                  | Add, update, view, delete members         |
+| `/attendance`               | Record gym attendance                     |
+| `/top-members`              | Get top active members (Heap-based logic) |
+| `/churn`                    | Predict churn risk using ML model         |
+| `/insights`                 | Generate gym usage insights               |
+| `/analytics`                | View processed analytics data             |
+| `/visualization/attendance` | View attendance chart 📊                  |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Python  
-- FastAPI  
-- MySQL  
-- SQL  
-- scikit-learn (Logistic Regression)  
-- Uvicorn  
-- REST APIs  
-- ETL Pipeline  
-- Data Structures (Heap)  
+* **Backend:** FastAPI, Python
+* **Database:** MySQL
+* **Data Processing:** Pandas, NumPy
+* **Machine Learning:** Scikit-learn
+* **Visualization:** Matplotlib
+* **Deployment:** Docker
 
 ---
 
-## 🚀 Getting Started
+## 🐳 Docker Setup
 
-### 1. Clone the repository
-```bash
----
+### 1. Build Docker Image
 
-2. Install dependencies
-pip install fastapi uvicorn mysql-connector-python pandas scikit-learn
-3. Run the backend server
-python -m uvicorn Gym_Management_System:app --reload
+```
+docker build -t gym-app .
+```
 
-Open in browser:
+### 2. Run Container
 
-http://127.0.0.1:8000/docs
-4. Run ETL pipeline
-python etl.py
----
+```
+docker run -p 8000:8000 gym-app
+```
 
-📊 API Endpoints
-Method	           Endpoint	          Description
-POST	             /members	          Add new member
-GET	               /members	          View all members
-PUT	               /members/{id}	    Update member
-DELETE	           /members/{id}	    Delete member
-POST	             /attendance	      Mark attendance
-GET	               /top-members	      Top active members
-GET	               /churn	            Churn prediction
-GET              	/analytics	        Analytics data (ETL output)
+### 3. Access API
+
+```
+http://localhost:8000/docs
+```
 
 ---
 
-🔄 ETL Pipeline
-Extract: Fetch attendance data from MySQL
-Transform: Calculate total visits and churn risk
-Load: Store processed data into member_analytics table
+## ⚠️ Important Note
+
+While using Docker:
+
+* Replace `localhost` with `host.docker.internal` for MySQL connection
 
 ---
 
-🤖 Machine Learning
-Model: Logistic Regression
-Feature Used: Visit frequency
-Output: High or Low churn risk
-Purpose: Identify inactive users for retention strategies
+## 🧠 Challenges & Learnings
+
+* Resolved Docker networking issue (localhost vs container networking)
+* Designed scalable API architecture
+* Integrated ML model into backend pipeline
+* Built analytics-ready data processing workflows
 
 ---
 
-📈 Key Learnings
-Built REST APIs using FastAPI
-Designed and managed relational database using MySQL
-Implemented ETL pipeline for data transformation
-Applied data structures (Heap) for optimization
-Integrated machine learning into backend system
+## 📌 Future Enhancements
+
+* Add authentication (JWT-based security)
+* Build interactive dashboard (Streamlit / Plotly)
+* Use Docker Compose for multi-container setup (App + DB)
+* Deploy on cloud (AWS / Render)
 
 ---
 
-💥 Future Improvements
-Add authentication (JWT)
-Deploy project on cloud
-Build analytics dashboard
-Implement CI/CD pipeline
+## 👩‍💻 Author
+
+**Sakshi Parve**
 
 ---
 
-👩‍💻 Author
-Sakshi Parve
+## ⭐ If you like this project, give it a star!
