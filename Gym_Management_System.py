@@ -10,7 +10,7 @@ def home():
 
 # -------- DB CONNECTION --------
 conn = mysql.connector.connect(
-    host="localhost",
+    host="host.docker.internal",
     user="root",
     password="Sakshi@123",
     database="sakshi_project_db"
@@ -171,3 +171,30 @@ def gym_insights():
 def get_analytics():
     cursor.execute("SELECT * FROM member_analytics")
     return {"analytics": cursor.fetchall()}
+
+# ------------------------ VISUALIZATION ------------------------
+import matplotlib.pyplot as plt
+from fastapi.responses import FileResponse
+
+@app.get("/visualization/attendance")
+def attendance_chart():
+    cursor.execute("""
+        SELECT member_id, COUNT(*) AS visits
+        FROM attendance
+        GROUP BY member_id
+    """)
+    data = cursor.fetchall()
+
+    members = [row[0] for row in data]
+    visits = [row[1] for row in data]
+
+    plt.figure()
+    plt.bar(members, visits)
+    plt.xlabel("Member ID")
+    plt.ylabel("Visits")
+    plt.title("Attendance per Member")
+
+    plt.savefig("attendance.png")
+    plt.close()
+
+    return FileResponse("attendance.png")
